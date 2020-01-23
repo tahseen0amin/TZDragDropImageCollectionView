@@ -127,7 +127,6 @@ extension TZDragDropImageCollectionView: UICollectionViewDropDelegate {
                 
             }) { (success) in
                 self.didFinishReorderCompletionHandler?(self.items)
-                debugPrint(self.items)
             }
             coordinator.drop(item.dragItem, toItemAt: destinationindexPath)
         }
