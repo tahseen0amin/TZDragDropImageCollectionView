@@ -1,24 +1,24 @@
 import UIKit
 
-class TZDragDropImageCollectionView: UIView {
+open class TZDragDropImageCollectionView: UIView {
     fileprivate var collectionView: UICollectionView!
     typealias DidFinishReorderingItems = ([UIImage]) -> Void
     /** Number of coloumns per row */
-    var columnsCount : CGFloat = 3 {
+    open var columnsCount : CGFloat = 3 {
         didSet {
             self.collectionView.reloadData()
         }
     }
     
     /** Image Array */
-    var items: [UIImage] = [] {
+    open var items: [UIImage] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
     
     /** Gets called after reordering items have finished */
-    var didFinishReorderCompletionHandler: DidFinishReorderingItems?
+    open var didFinishReorderCompletionHandler: DidFinishReorderingItems?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
