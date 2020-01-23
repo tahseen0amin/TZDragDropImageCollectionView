@@ -20,6 +20,10 @@ open class TZDragDropImageCollectionView: UIView {
     /** Gets called after reordering items have finished */
     public var didFinishReorderCompletionHandler: DidFinishReorderingItems?
     
+    public reloadData() {
+        collectionView.reloadData()
+    }
+    
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
