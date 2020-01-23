@@ -1,6 +1,6 @@
 import UIKit
 
-public class TZDragDropImageCollectionView: UIView {
+open class TZDragDropImageCollectionView: UIView {
     fileprivate var collectionView: UICollectionView!
     public typealias DidFinishReorderingItems = ([UIImage]) -> Void
     /** Number of coloumns per row */
@@ -20,7 +20,7 @@ public class TZDragDropImageCollectionView: UIView {
     /** Gets called after reordering items have finished */
     public var didFinishReorderCompletionHandler: DidFinishReorderingItems?
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
