@@ -1,31 +1,31 @@
 import UIKit
 
-class TZDragDropImageCollectionView: UIView {
+public class TZDragDropImageCollectionView: UIView {
     fileprivate var collectionView: UICollectionView!
-    typealias DidFinishReorderingItems = ([UIImage]) -> Void
+    public typealias DidFinishReorderingItems = ([UIImage]) -> Void
     /** Number of coloumns per row */
-    var columnsCount : CGFloat = 3 {
+    public var columnsCount : CGFloat = 3 {
         didSet {
             self.collectionView.reloadData()
         }
     }
     
     /** Image Array */
-    var items: [UIImage] = [] {
+    public var items: [UIImage] = [] {
         didSet {
             self.collectionView.reloadData()
         }
     }
     
     /** Gets called after reordering items have finished */
-    var didFinishReorderCompletionHandler: DidFinishReorderingItems?
+    public var didFinishReorderCompletionHandler: DidFinishReorderingItems?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
     
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         self.setupUI()
     }
     
@@ -48,11 +48,11 @@ class TZDragDropImageCollectionView: UIView {
 }
 
 extension TZDragDropImageCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CELL", for: indexPath)
         cell.backgroundColor = .white
         
@@ -70,14 +70,14 @@ extension TZDragDropImageCollectionView: UICollectionViewDelegate, UICollectionV
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let length = (collectionView.frame.width - 8) / columnsCount
         return CGSize(width: length, height: length)
     }
 }
 
 extension TZDragDropImageCollectionView: UICollectionViewDragDelegate {
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    public func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         let item = self.items[indexPath.row]
         let itemProvider = NSItemProvider(object: item)
         let dragItem = UIDragItem(itemProvider: itemProvider)
@@ -87,14 +87,14 @@ extension TZDragDropImageCollectionView: UICollectionViewDragDelegate {
 }
 
 extension TZDragDropImageCollectionView: UICollectionViewDropDelegate {
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+    public func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         if collectionView.hasActiveDrag {
             return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
         return UICollectionViewDropProposal(operation: .forbidden)
     }
     
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+    public func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         let destinationIndexPath : IndexPath
         if let indexPath = coordinator.destinationIndexPath {
             destinationIndexPath = indexPath
