@@ -26,6 +26,11 @@ Use Closure to get new reordered array.
 }
 ```
 
+# Reference
+Read this blog. Most of the code is from this blog
+[Drag, Drop & Reorder Collection View Cells into One or More UICollectionView by Max Nelson](https://medium.com/hackernoon/how-to-drag-drop-uicollectionview-cells-by-utilizing-dropdelegate-and-dragdelegate-6e3512327202)
+
 # License
 Free to use
+
 
