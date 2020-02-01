@@ -130,8 +130,10 @@ extension TZDragDropCollectionView: UICollectionViewDropDelegate {
             
             collectionView.performBatchUpdates({
                 
+                let movedItem = self.items[sourceIndexPath.item]
                 self.items.remove(at: sourceIndexPath.item)
-                self.items.insert(item.dragItem.localObject as! TZCollectionItem, at: destinationindexPath.item)
+                self.items.insert(movedItem, at: destinationindexPath.item)
+//                self.items.insert(item.dragItem.localObject as! TZCollectionItem, at: destinationindexPath.item)
                 
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationindexPath])
