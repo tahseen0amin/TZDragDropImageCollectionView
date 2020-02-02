@@ -75,18 +75,21 @@ extension TZDragDropCollectionView: UICollectionViewDelegate, UICollectionViewDa
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CELL", for: indexPath)
         cell.backgroundColor = .white
-        
         let image = self.items[indexPath.row].image
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 4).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 4).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -4).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -4).isActive = true
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        
+        if let imageView = cell.viewWithTag(99) as? UIImageView {
+            imageView.image = image
+        } else {
+            let imageView = UIImageView(image: image)
+            imageView.tag = 99
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            cell.contentView.addSubview(imageView)
+            imageView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 4).isActive = true
+            imageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 4).isActive = true
+            imageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -4).isActive = true
+            imageView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -4).isActive = true
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.masksToBounds = true
+        }
         return cell
     }
     
