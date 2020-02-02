@@ -62,10 +62,6 @@ open class TZDragDropCollectionView: UIView {
         if collectionView == nil {
             collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
             self.addSubview(collectionView)
-            collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         }
     }
     
