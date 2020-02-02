@@ -85,7 +85,7 @@ extension TZDragDropCollectionView: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let length = (collectionView.frame.width - 8) / columnsCount
         return CGSize(width: length, height: length)
     }
@@ -133,7 +133,6 @@ extension TZDragDropCollectionView: UICollectionViewDropDelegate {
                 let movedItem = self.items[sourceIndexPath.item]
                 self.items.remove(at: sourceIndexPath.item)
                 self.items.insert(movedItem, at: destinationindexPath.item)
-//                self.items.insert(item.dragItem.localObject as! TZCollectionItem, at: destinationindexPath.item)
                 
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationindexPath])
