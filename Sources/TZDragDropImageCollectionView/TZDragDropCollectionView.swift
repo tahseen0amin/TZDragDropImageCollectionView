@@ -12,7 +12,18 @@ public protocol TZCollectionItem {
 }
 
 open class TZDragDropCollectionView: UIView {
-    fileprivate var collectionView: UICollectionView!
+    open var collectionView: UICollectionView! {
+        didSet {
+            collectionView.backgroundColor = .clear
+            collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CELL")
+            collectionView.dragDelegate = self
+            collectionView.dropDelegate = self
+            collectionView.dragInteractionEnabled = true
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            collectionView.contentInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        }
+    }
     public typealias DidFinishReorderingItems = ([TZCollectionItem]) -> Void
     /** Number of coloumns per row */
     public var columnsCount : CGFloat = 3 {
@@ -48,16 +59,14 @@ open class TZDragDropCollectionView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CELL")
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
-        collectionView.dragInteractionEnabled = true
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.contentInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        self.addSubview(collectionView)
+        if collectionView == nil {
+            collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
+            collectionView.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0).isActive = true
+            collectionView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 0).isActive = true
+            collectionView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: 0).isActive = true
+            collectionView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0).isActive = true
+            self.addSubview(collectionView)
+        }
     }
     
 }
